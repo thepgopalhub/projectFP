@@ -11,21 +11,48 @@ export default function Clients() {
   }, []);
 
   return (
-    <section id="clients" className="py-20 bg-gray-100">
+    <section id="clients" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-10">Happy Clients</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
+          Happy Clients
+        </h2>
+
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
           {clients.map((c) => (
             <div
               key={c._id}
-              className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition"
+              className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl border border-gray-100
+              transition transform hover:-translate-y-1 duration-300 flex flex-col"
             >
-              <p className="text-gray-700 italic">"{c.review}"</p>
-              <h3 className="mt-4 font-semibold text-right">— {c.name}</h3>
+              {/* Client Image */}
+              {c.image && (
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  className="w-20 h-20 rounded-full object-cover mx-auto mb-4 shadow-md"
+                />
+              )}
+
+              {/* Text */}
+              <p className="text-gray-700 italic text-center mb-4">
+                “{c.review}”
+              </p>
+
+              <h3 className="font-semibold text-center text-gray-900 text-lg">
+                {c.name}
+              </h3>
+              {c.designation && (
+                <p className="text-blue-500 text-sm text-center">
+                  {c.designation}
+                </p>
+              )}
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

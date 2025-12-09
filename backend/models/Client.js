@@ -6,12 +6,17 @@ const clientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    designation: {
+      type: String,
+      required: true,
+    },
     review: {
       type: String,
       required: true,
     },
     image: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }

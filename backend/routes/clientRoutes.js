@@ -3,7 +3,6 @@ import Client from "../models/Client.js";
 
 const router = express.Router();
 
-// CREATE
 router.post("/", async (req, res) => {
   try {
     const client = await Client.create(req.body);
@@ -13,7 +12,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// READ ALL
 router.get("/", async (req, res) => {
   try {
     const clients = await Client.find().sort({ createdAt: -1 });
@@ -23,21 +21,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// UPDATE
-router.put("/:id", async (req, res) => {
-  try {
-    const updated = await Client.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json(updated);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// DELETE
 router.delete("/:id", async (req, res) => {
   try {
     await Client.findByIdAndDelete(req.params.id);

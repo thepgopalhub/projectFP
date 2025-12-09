@@ -3,7 +3,7 @@ import ContactMessage from "../models/ContactMessage.js";
 
 const router = express.Router();
 
-// CREATE message (from landing page)
+// CREATE message (landing page)
 router.post("/", async (req, res) => {
   try {
     const msg = await ContactMessage.create(req.body);
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// READ all (admin)
+// READ all (admin panel)
 router.get("/", async (req, res) => {
   try {
     const msgs = await ContactMessage.find().sort({ createdAt: -1 });
