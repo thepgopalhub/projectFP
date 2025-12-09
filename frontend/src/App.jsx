@@ -1,12 +1,19 @@
-import './App.css'
+import Navbar from "./components/Navbar";
+import Hero from "./sections/Hero";
+import Projects from "./sections/Projects";
+import Clients from "./sections/Clients";
+import Newsletter from "./sections/Newsletter";
+import Contact from "./sections/Contact";
 
-function App() {
-
+export default function App() {
   return (
     <>
-        <h1 className='text-red-700'>hello world</h1>
+      <Navbar />
+      <Hero />
+      <Projects />
+      <Clients />
+      <Newsletter />
+      <Contact />
     </>
-  )
+  );
 }
-
-export default App
