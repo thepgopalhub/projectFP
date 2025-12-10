@@ -15,10 +15,15 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-  origin: ["http://localhost:5173"], //, "https://your-frontend-domain.vercel.app"
+  origin: ["http://localhost:5173", "https://project-fp.vercel.app/"], //, "https://your-frontend-domain.vercel.app" https://project-fp.vercel.app/
   credentials: true
 }));
-app.use(express.json());
+pp.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: false, // true only if you use cookies / auth headers
+  })
+);
 
 // Register API routes
 app.use("/api/projects", projectRoutes);
