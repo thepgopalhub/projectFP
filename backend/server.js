@@ -18,7 +18,7 @@ app.use(cors({
   origin: ["http://localhost:5173", "https://project-fp.vercel.app/"], //, "https://your-frontend-domain.vercel.app" https://project-fp.vercel.app/
   credentials: true
 }));
-pp.use(
+app.use(
   cors({
     origin: allowedOrigins,
     credentials: false, // true only if you use cookies / auth headers
