@@ -11,7 +11,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 dotenv.config();
 
 const app = express();
-//comment
+//commen
 
 // Middlewares
 app.use(cors({
