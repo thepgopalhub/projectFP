@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+
 import projectRoutes from "./routes/projectRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
@@ -9,36 +10,46 @@ import newsletterRoutes from "./routes/newsletterRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 
 dotenv.config();
-
 const app = express();
-//commen
 
-// Middlewares
-app.use(cors({
-  origin: ["http://localhost:5173", "https://project-fp.vercel.app/"], //, "https://your-frontend-domain.vercel.app" https://project-fp.vercel.app/
-  credentials: true
-}));
+// -------------------------------
+// CORS Configuration
+// -------------------------------
+const allowedOrigins = [
+  "http://localhost:5173",         // local dev
+  "https://project-fp.vercel.app"  // deployed frontend
+];
+
 app.use(
   cors({
     origin: allowedOrigins,
-    credentials: false, // true only if you use cookies / auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Register API routes
+// Required for parsing JSON bodies
+app.use(express.json());
+
+// -------------------------------
+// API Routes
+// -------------------------------
 app.use("/api/projects", projectRoutes);
 app.use("/api/clients", clientRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/upload", uploadRoutes);
 
+// -------------------------------
 // MongoDB Connection
+// -------------------------------
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("Mongo Error:", err));
 
+// -------------------------------
 // Start Server
-app.listen(process.env.PORT, () =>
-  console.log(`Server started on port ${process.env.PORT}`)
-);
+// -------------------------------
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
