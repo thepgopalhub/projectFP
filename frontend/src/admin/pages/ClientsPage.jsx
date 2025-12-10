@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../api/api";
-import ImageCropper from "../../components/ImageCropper";
+import ImageCropper from "../../components/ImgCropper";
 
 export default function ClientsPage() {
   const [clients, setClients] = useState([]);
@@ -121,7 +121,7 @@ export default function ClientsPage() {
 
         {/* BUTTON */}
         <button
-          className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold disabled:opacity-50 hover:bg-blue-700 transition shadow"
+          className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold disabled:opacity-50 hover:bg-blue-700 transition shadow cursor-pointer"
           onClick={submit}
           disabled={
             !form.name ||
@@ -163,7 +163,7 @@ export default function ClientsPage() {
 
             {/* Delete */}
             <button
-              className="text-red-500 font-semibold hover:text-red-700"
+              className="text-red-500 font-semibold hover:text-red-700 cursor-pointer"
               onClick={() => remove(c._id)}
             >
               Delete

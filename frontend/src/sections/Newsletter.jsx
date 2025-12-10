@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { API_URL } from "../api/api";
+import toast from "react-hot-toast";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -17,10 +18,10 @@ export default function Newsletter() {
       });
 
       const data = await res.json();
-      alert(data.message || "Subscribed!");
+      toast.success(data.message || "Subscribed!");
       if (res.ok) setEmail("");
     } catch {
-      alert("Something went wrong. Try again.");
+      toast.error("Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
@@ -58,7 +59,7 @@ export default function Newsletter() {
                 onClick={submit}
                 disabled={!email || loading}
                 className="px-6 md:px-8 py-3 bg-orange-500 text-white font-semibold 
-                rounded-r-xl hover:bg-orange-600 transition disabled:opacity-60"
+                rounded-r-xl hover:bg-orange-600 transition disabled:opacity-60 cursor-pointer"
               >
                 {loading ? "Subscribing..." : "Subscribe"}
               </button>

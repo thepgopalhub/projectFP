@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../api/api";
-import ImageCropper from "../../components/ImageCropper";
+import ImageCropper from "../../components/ImgCropper";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -13,7 +13,6 @@ export default function ProjectsPage() {
   const [showCropper, setShowCropper] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Load projects
   const loadProjects = () => {
     fetch(`${API_URL}/projects`)
       .then((res) => res.json())
@@ -24,7 +23,6 @@ export default function ProjectsPage() {
     loadProjects();
   }, []);
 
-  // Create project
   const submit = async () => {
     await fetch(`${API_URL}/projects`, {
       method: "POST",
@@ -36,7 +34,6 @@ export default function ProjectsPage() {
     loadProjects();
   };
 
-  // Delete project
   const remove = async (id) => {
     await fetch(`${API_URL}/projects/${id}`, { method: "DELETE" });
     loadProjects();
@@ -68,7 +65,9 @@ export default function ProjectsPage() {
         />
         <input
           type="file"
+          accept="image/*"
           onChange={(e) => {
+            if (!e.target.files?.[0]) return;
             setSelectedImage(e.target.files[0]);
             setShowCropper(true);
           }}
@@ -76,7 +75,7 @@ export default function ProjectsPage() {
         />
 
         <button
-          className="bg-black text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="bg-black text-white px-4 py-2 rounded-lg disabled:opacity-50 cursor-pointer"
           onClick={submit}
           disabled={
             !form.title || !form.category || !form.description || !form.image
@@ -99,7 +98,7 @@ export default function ProjectsPage() {
             </div>
 
             <button
-              className="text-red-500 hover:text-red-700"
+              className="text-red-500 hover:text-red-700 cursor-pointer"
               onClick={() => remove(p._id)}
             >
               Delete
@@ -110,7 +109,7 @@ export default function ProjectsPage() {
 
       {showCropper && selectedImage && (
         <ImageCropper
-          imageFile={selectedImage} // VERY IMPORTANT
+          imageFile={selectedImage}
           onCropDone={async (blob) => {
             const formData = new FormData();
             formData.append("image", blob);
@@ -122,7 +121,7 @@ export default function ProjectsPage() {
 
             const data = await res.json();
 
-            setForm({ ...form, image: data.url });
+            setForm((prev) => ({ ...prev, image: data.url }));
             setShowCropper(false);
             setSelectedImage(null);
           }}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { API_URL } from "../api/api";
+import toast from "react-hot-toast";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -21,14 +22,14 @@ export default function Contact() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error);
+        toast.error(data.error);
         return;
       }
 
-      alert("Message sent!");
+      toast.success("Message sent!");
       setForm({ name: "", email: "", phone: "", city: "", message: "" });
     } catch {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
@@ -90,7 +91,7 @@ export default function Contact() {
 
           <button
             onClick={submit}
-            className="w-full mt-6 bg-orange-500 text-white py-3 rounded-lg font-medium hover:bg-orange-600 hover:shadow-lg transition"
+            className="w-full mt-6 bg-orange-500 text-white py-3 rounded-lg font-medium hover:bg-orange-600 hover:shadow-lg transition cursor-pointer"
           >
             Send Message
           </button>

@@ -13,7 +13,6 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 bg-[#f3f6ff]">
       <div className="max-w-6xl mx-auto px-6">
-
         {/* Section Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800">
@@ -62,7 +61,6 @@ export default function Projects() {
                   </p>
                 )}
 
-                {/* Read More Button */}
                 <button
                   type="button"
                   className="mt-auto bg-orange-500 text-white text-sm font-semibold 
@@ -75,7 +73,6 @@ export default function Projects() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
